@@ -4,22 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "apollo-init": "mkdir -p apollo/build; cd ./apollo/build; touch index.js",
-    "clean:apollo": "rimraf apollo/build",
-    "apollo:prebuild": "npm run clean:apollo && npm run apollo-init",
+    "apollo-init": "mkdir -p dist/apollo; cd ./dist/apollo; touch index.js",
+    "clean:apollo": "rimraf dist/apollo",
+    "apollo:start-server": "nodemon --watch dist/apollo --exec \"node dist/apollo/index.js\"",
     "apollo:build-server": "webpack --config webpack.apollo.js --watch --progress",
-    "apollo:start-server": "nodemon --watch apollo/build --exec \"node apollo/build/index.js\"",
-    "apollo": "npm-run-all --parallel apollo:*"
+    "apollo-setup": "npm run clean:apollo && npm run apollo-init",
+    "apollo": "npm run apollo-setup && npm-run-all --parallel apollo:*"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.17.0",
-    "graphql": "^15.3.0",
+    "apollo-server-express": "^2.17.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "graphql": "^14.7.0",
     "nodemon": "^2.0.4",
     "typescript": "^4.0.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.7",
+    "@types/node": "^14.6.2",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "ts-loader": "^8.0.3",
