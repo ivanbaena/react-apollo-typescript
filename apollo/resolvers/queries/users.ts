@@ -1,16 +1,7 @@
-const users = [
-  {
-    name: 'Harry Potter',
-    id: 1,
-  },
-  {
-    name: 'Ron Granger',
-    id: 2,
-  },
-];
+import { User } from '../../models';
 
 export const usersQuery = {
-  users: () => users,
-  fetchUser: (_: any, { id }: any, { users: [] }) =>
-    users.find((user) => user.id === id),
+  users: () => User.find({}),
+  fetchUser: (_: any, { id }: any, { User: [] }) =>
+    User.find((user) => user.id === id),
 };

@@ -7,10 +7,11 @@ export interface PostInterface extends Document {
   userId: Number;
 }
 
-const PostSchema = new Schema({
+export const PostSchema = new Schema({
   post: { type: String, required: true },
   date: Date,
   userId: Number,
+  name: String,
 });
 
 export const Post = mongoose.model<PostInterface>('posts', PostSchema);
