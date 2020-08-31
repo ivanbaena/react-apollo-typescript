@@ -1,3 +1,4 @@
 node_modules
 dist
+apollo/keys.ts
 .DS_Store
