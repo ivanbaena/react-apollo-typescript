@@ -10,12 +10,12 @@ export const user = gql`
 
   extend type Query {
     users: [User]
-    fetchUser(id: Int!): User
+    getUser(id: ID): User
   }
 
   extend type Mutation {
     addUser(username: String!, password: String!): User
     deleteUser(_id: ID!): User
-    updateUser(id: ID!, username: String!): User
+    updateUser(_id: ID!, username: String!): User
   }
 `;

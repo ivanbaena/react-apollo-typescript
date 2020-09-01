@@ -11,7 +11,7 @@ export interface UserInterFace extends Document {
 const UserSchema = new Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
-  post: [PostSchema],
+  post: { type: Array },
 });
 
 export const User = mongoose.model<UserInterFace>('users', UserSchema);

@@ -5,6 +5,9 @@ import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 import { MONGO_URI } from './keys';
 
+import { Users } from './data-source/user';
+import { User } from './models';
+
 const app = express();
 
 // Mongoose's built in promise library is deprecated, replace it with ES2015 Promise
@@ -19,11 +22,15 @@ mongoose.connection
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources: () => ({}),
+  dataSources: () => ({
+    users: new Users(User),
+  }),
 });
 
 server.applyMiddleware({ app });
 
 app.listen({ port: 4000 }, () =>
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+  console.log(
+    `🚀 Server ready at http://localhost:4000${server.graphqlPath}, {useNewUrlParser: true}`
+  )
 );

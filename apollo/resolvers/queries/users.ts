@@ -1,7 +1,5 @@
-import { User } from '../../models';
-
 export const usersQuery = {
-  users: () => User.find({}),
-  fetchUser: (_: any, { id }: any, { User: [] }) =>
-    User.find((user) => user.id === id),
+  users: (_: any, {}: any, { dataSources }: any) => dataSources.users.users(),
+  getUser: (_: any, { id }: any, { dataSources }: any) =>
+    dataSources.users.getUser(id),
 };

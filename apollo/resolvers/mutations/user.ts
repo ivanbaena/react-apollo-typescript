@@ -1,17 +1,21 @@
-import { User, UserInterFace } from '../../models';
+import { UserInterFace } from '../../models';
 
 export const userMutations = {
-  addUser: (_: any, { username, password }: UserInterFace, { User: [] }) => {
-    new User({ username, password }).save();
+  addUser: (
+    _: any,
+    { username, password }: UserInterFace,
+    { dataSources }: any
+  ): void => {
+    dataSources.users.save(username, password);
   },
-  deleteUser: (_: any, { _id }: UserInterFace, { User: [] }): void => {
-    User.findByIdAndDelete(_id).exec();
+  deleteUser: (_: any, { _id }: UserInterFace, { dataSources }: any): void => {
+    dataSources.users.delete(_id);
   },
   updateUser: (
     _: any,
     { _id, username }: UserInterFace,
-    { User: [] }
+    { dataSources }: any
   ): void => {
-    User.findByIdAndUpdate(_id, { username: username }).exec();
+    dataSources.users.update(_id, username);
   },
 };
