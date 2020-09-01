@@ -5,8 +5,8 @@ import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 import { MONGO_URI } from './keys';
 
-import { Users } from './data-source/user';
-import { User } from './models';
+import { Users, Posts } from './data-source';
+import { User, Post } from './models';
 
 const app = express();
 
@@ -24,6 +24,7 @@ const server = new ApolloServer({
   resolvers,
   dataSources: () => ({
     users: new Users(User),
+    posts: new Posts(Post),
   }),
 });
 

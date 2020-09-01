@@ -12,7 +12,7 @@ export const post = gql`
 
   extend type Query {
     posts: [Post]
-    fetchUserPosts(id: Int!): [Post]
+    userPosts(id: Int!): [Post]
   }
 
   extend type Mutation {

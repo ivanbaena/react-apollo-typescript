@@ -1,7 +1,5 @@
-import { Post } from '../../models';
-
 export const postsQuery = {
-  posts: () => Post.find({}),
-  fetchUserPosts: async (_: any, { id }: any, { posts: [] }) =>
-    await Post.find({ userId: id }),
+  posts: (_: any, {}: any, { dataSources }: any) => dataSources.posts.posts(),
+  userPosts: (_: any, { id }: any, { dataSources }: any) =>
+    dataSources.posts.userPosts(id),
 };
