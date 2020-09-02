@@ -1,13 +1,17 @@
-import { Post, PostInterface } from '../../models';
+import { PostInterface } from '../../models';
 
 export const postMutations = {
   addPost: (_: void, { post, userId }: PostInterface, { dataSources }: any) => {
     dataSources.posts.save(post, userId, new Date());
   },
-  deletePost: (_: void, { _id }: PostInterface): void => {
-    Post.findByIdAndDelete(_id).exec();
+  deletePost: (_: void, { _id }: PostInterface, { dataSources }: any): void => {
+    dataSources.posts.delete(_id);
   },
-  updatePost: (_: void, { _id, post }: PostInterface): void => {
-    Post.findByIdAndUpdate(_id, { post: post }).exec();
+  updatePost: (
+    _: void,
+    { _id, post }: PostInterface,
+    { dataSources }: any
+  ): void => {
+    dataSources.posts.update(_id, post);
   },
 };
