@@ -14,4 +14,4 @@ const UserSchema = new Schema({
   post: { type: Array },
 });
 
-export const User = mongoose.model<UserInterFace>('users', UserSchema);
+export const user = mongoose.model<UserInterFace>('users', UserSchema);

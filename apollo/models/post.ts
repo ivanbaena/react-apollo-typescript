@@ -14,4 +14,4 @@ export const PostSchema = new Schema({
   name: String,
 });
 
-export const Post = mongoose.model<PostInterface>('posts', PostSchema);
+export const post = mongoose.model<PostInterface>('posts', PostSchema);

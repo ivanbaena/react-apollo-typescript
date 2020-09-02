@@ -3,10 +3,10 @@ import mongoose from 'mongoose';
 import { ApolloServer } from 'apollo-server-express';
 import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
-import { MONGO_URI } from './keys';
+import { MONGO_URI } from './db';
 
 import { Users, Posts } from './data-source';
-import { User, Post } from './models';
+import { user, post } from './models';
 
 const app = express();
 
@@ -23,8 +23,8 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources: () => ({
-    users: new Users(User),
-    posts: new Posts(Post),
+    users: new Users(user),
+    posts: new Posts(post),
   }),
 });
 
