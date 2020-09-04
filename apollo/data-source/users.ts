@@ -1,6 +1,8 @@
 import { MongoDataSource } from 'apollo-datasource-mongodb';
 import { UserInterFace } from '../models';
 import { Types } from 'mongoose';
+import { signup, login } from '../services';
+import { Request } from 'express';
 
 export class Users extends MongoDataSource<UserInterFace> {
   users() {
@@ -10,8 +12,12 @@ export class Users extends MongoDataSource<UserInterFace> {
     return this.findOneById(userId);
   }
 
-  save(username: String, password: String) {
-    new this.model({ username: username, password: password, post: [] }).save();
+  signup(email: String, username: String, password: String, req: Request) {
+    signup({ email, username, password, req });
+  }
+
+  login(email: String, password: String, req: Request) {
+    login({ email, password, req });
   }
 
   delete(id: Types.ObjectId) {

@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 export const user = gql`
   type User {
     _id: ID
+    email: String
     username: String
     password: String
     post: [Post]
@@ -16,7 +17,8 @@ export const user = gql`
   }
 
   extend type Mutation {
-    signup(username: String!, password: String!): User
+    signup(email: String!, username: String!, password: String!): User
+    login(email: String!, password: String!): User
     deleteUser(_id: ID!): User
     updateUser(_id: ID!, username: String!): User
   }
