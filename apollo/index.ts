@@ -7,6 +7,7 @@ import { MONGO_URI } from './db';
 
 import { Users, Posts } from './data-source';
 import { user, post } from './models';
+import { isAuth } from './services/';
 
 const app = express();
 
@@ -25,6 +26,9 @@ const server = new ApolloServer({
   dataSources: () => ({
     users: new Users(user),
     posts: new Posts(post),
+  }),
+  context: () => ({
+    isAuth,
   }),
 });
 

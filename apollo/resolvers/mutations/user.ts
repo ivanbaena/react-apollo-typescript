@@ -1,7 +1,7 @@
 import { UserInterFace } from '../../models';
 
 export const userMutations = {
-  addUser: (
+  signup: (
     _: any,
     { username, password }: UserInterFace,
     { dataSources }: any
