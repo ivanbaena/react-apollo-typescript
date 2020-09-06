@@ -10,14 +10,20 @@ const LocalStrategy = PassportLocal.Strategy;
 // SerializeUser is used to provide some identifying token that can be saved
 // in the users session.  We traditionally use the 'ID' for this.
 passport.serializeUser((user: UserInterFace, done: Function) => {
-  done(null, user.id);
+  console.log('serialize-2', user._id);
+  done(null, user._id);
 });
 
 // The counterpart of 'serializeUser'.  Given only a user's ID, we must return
 // the user object.  This object is placed on 'req.user'.
-passport.deserializeUser((id: String, done: Function) => {
-  User.findById(id, (err: Error, user: UserInterFace) => {
-    done(err, user);
+passport.deserializeUser((_id: String, done: Function) => {
+  console.log('desrialize', _id);
+  User.findById(_id, (err: Error, user: UserInterFace) => {
+    if (err) {
+      done(null, false, { error: err });
+    } else {
+      done(null, user);
+    }
   });
 });
 
@@ -76,7 +82,7 @@ export function signup({ email, username, password, req }: any) {
     })
     .then((user) => {
       return new Promise((resolve, reject) => {
-        req.logIn(user, (err: Error) => {
+        req.login(user, (err: Error) => {
           if (err) {
             reject(err);
           }
@@ -99,12 +105,15 @@ export function login({ email, password, req }: any) {
         reject(err);
       }
 
-      req.login(user, () => resolve(user));
+      req.login(user, () => {
+        console.log('login', user);
+        resolve(user);
+      });
     })({ body: { email, password } });
   });
 }
 
 export const isAuth = (req: Request) => {
-  console.log(req);
+  console.log('isAuth ', req);
   return true;
 };

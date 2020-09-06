@@ -6,6 +6,8 @@ export const usersQuery = {
     // validate auth status
     // with call to service
     // located on apollo context
-    return context.isAuth;
+    console.log(req);
+
+    return context.isAuth();
   },
 };

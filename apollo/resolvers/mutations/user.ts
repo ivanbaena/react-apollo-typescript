@@ -7,7 +7,7 @@ export const userMutations = {
     { dataSources }: any
   ): void => {
     const req = dataSources.users.context.request();
-    dataSources.users.signup(email, username, password, req);
+    return dataSources.users.signup(email, username, password, req);
   },
   login: (
     _: any,
@@ -15,7 +15,7 @@ export const userMutations = {
     { dataSources }: any
   ): void => {
     const req = dataSources.users.context.request();
-    dataSources.users.login(email, password, req);
+    return dataSources.users.login(email, password, req);
   },
   deleteUser: (_: any, { _id }: UserInterFace, { dataSources }: any): void => {
     dataSources.users.delete(_id);

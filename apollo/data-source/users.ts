@@ -13,11 +13,11 @@ export class Users extends MongoDataSource<UserInterFace> {
   }
 
   signup(email: String, username: String, password: String, req: Request) {
-    signup({ email, username, password, req });
+    return signup({ email, username, password, req });
   }
 
   login(email: String, password: String, req: Request) {
-    login({ email, password, req });
+    return login({ email, password, req });
   }
 
   delete(id: Types.ObjectId) {

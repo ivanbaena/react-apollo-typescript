@@ -1,9 +1,12 @@
-import express from 'express';
+import express, { Request } from 'express';
 import mongoose from 'mongoose';
 import { ApolloServer } from 'apollo-server-express';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import passport from 'passport';
+import './services/auth';
 
 import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
@@ -15,6 +18,7 @@ import { isAuth } from './services/';
 const app = express();
 
 const MongoStore = connectMongo(session);
+
 // Mongoose's built in promise library is deprecated, replace it with ES2015 Promise
 mongoose.Promise = global.Promise;
 // Connect to the mongoDB instance and log a message
@@ -29,6 +33,8 @@ mongoose.connection
 // the cookie and modifies the request object to indicate which user made the request
 // The cookie itself only contains the id of a session; more data about the session
 // is stored inside of MongoDB.
+app.use(cookieParser('asljASDR2084^^!'));
+app.use(bodyParser());
 app.use(
   session({
     resave: true,
@@ -57,7 +63,7 @@ const server = new ApolloServer({
   }),
   context: ({ req }) => ({
     request: () => req,
-    isAuth: isAuth(req),
+    isAuth: (req: Request) => isAuth(req),
   }),
 });
 
@@ -68,3 +74,8 @@ app.listen({ port: 4000 }, () =>
     `🚀 Server ready at http://localhost:4000${server.graphqlPath}, {useNewUrlParser: true}`
   )
 );
+
+app.get('/', (req, res) => {
+  console.log('Auth-Status', req.user);
+  res.send('hi');
+});
