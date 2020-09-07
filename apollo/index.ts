@@ -38,8 +38,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     resave: true,
-    saveUninitialized: false,]
-    name:"auth",
+    saveUninitialized: false,
+    name: 'auth',
     secret: 'qwertyasdfg',
     store: new MongoStore({
       mongooseConnection: mongoose.connection,

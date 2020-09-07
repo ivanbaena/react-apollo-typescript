@@ -9,7 +9,13 @@
     "apollo:start-server": "nodemon --watch dist/apollo --exec \"node dist/apollo/index.js\"",
     "apollo:build-server": "webpack --config webpack.apollo.js --watch --progress",
     "apollo-setup": "npm run clean:apollo && npm run apollo-init",
-    "apollo": "npm run apollo-setup && npm-run-all --parallel apollo:*"
+    "apollo": "npm run apollo-setup && npm-run-all --parallel apollo:*",
+    "dev-init": "mkdir -p dist/src; cd ./dist/src; touch index.js",
+    "clean:dev": "rimraf dist/src",
+    "dev:start": "nodemon --watch dist/src --exec \"node dist/src/index.js\"",
+    "dev:build": "webpack --config webpack.client.js --watch --progress",
+    "dev-setup": "npm run clean:dev && npm run dev-init",
+    "dev": "npm run dev-setup && npm-run-all --parallel dev:*"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +33,9 @@
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "saslprep": "^1.0.3",
     "typescript": "^4.0.2"
   },
