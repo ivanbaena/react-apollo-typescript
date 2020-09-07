@@ -13,12 +13,13 @@ export const user = gql`
   extend type Query {
     users: [User]
     getUser(id: ID): User
-    isAuth(id: ID): Boolean
+    currentUser: User
   }
 
   extend type Mutation {
     signup(email: String!, username: String!, password: String!): User
     login(email: String!, password: String!): User
+    logout: Boolean
     deleteUser(_id: ID!): User
     updateUser(_id: ID!, username: String!): User
   }

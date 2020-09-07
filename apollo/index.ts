@@ -3,53 +3,60 @@ import mongoose from 'mongoose';
 import { ApolloServer } from 'apollo-server-express';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
 import passport from 'passport';
-import './services/auth';
+import passportConfig from './services/passportConfig';
 
 import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 import { MONGO_URI } from './db';
 import { Users, Posts } from './data-source';
 import { user, post } from './models';
-import { isAuth } from './services/';
 
 const app = express();
-
-const MongoStore = connectMongo(session);
 
 // Mongoose's built in promise library is deprecated, replace it with ES2015 Promise
 mongoose.Promise = global.Promise;
 // Connect to the mongoDB instance and log a message
 // on success or failure
-mongoose.connect(MONGO_URI);
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 mongoose.connection
   .once('open', () => console.log('Connected to MongoLab instance.'))
   .on('error', (error) => console.log('Error connecting to MongoLab:', error));
+
+const MongoStore = connectMongo(session);
 
 // Configures express to use sessions.  This places an encrypted identifier
 // on the users cookie.  When a user makes a request, this middleware examines
 // the cookie and modifies the request object to indicate which user made the request
 // The cookie itself only contains the id of a session; more data about the session
 // is stored inside of MongoDB.
-app.use(cookieParser('asljASDR2084^^!'));
-app.use(bodyParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     resave: true,
-    saveUninitialized: true,
-    secret: 'aaabbbccc',
+    saveUninitialized: false,]
+    name:"auth",
+    secret: 'qwertyasdfg',
     store: new MongoStore({
-      url: MONGO_URI,
+      mongooseConnection: mongoose.connection,
       autoReconnect: true,
+      collection: 'sessions',
     }),
+    cookie: {
+      secure: false,
+      maxAge: 1000 * 30,
+    },
   })
 );
 
 // Passport is wired into express as a middleware. When a request comes in,
 // Passport will examine the request's session (as set by the above config) and
 // assign the current user to the 'req.user' object.  See also servces/auth.js
+passportConfig(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -63,11 +70,12 @@ const server = new ApolloServer({
   }),
   context: ({ req }) => ({
     request: () => req,
-    isAuth: (req: Request) => isAuth(req),
+    getUser: () => req.user,
+    logout: () => req.logout(),
   }),
 });
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, cors: false });
 
 app.listen({ port: 4000 }, () =>
   console.log(
@@ -76,6 +84,5 @@ app.listen({ port: 4000 }, () =>
 );
 
 app.get('/', (req, res) => {
-  console.log('Auth-Status', req.user);
   res.send('hi');
 });

@@ -17,6 +17,7 @@ export const userMutations = {
     const req = dataSources.users.context.request();
     return dataSources.users.login(email, password, req);
   },
+  logout: (parent: any, args: any, context: any) => context.logout(),
   deleteUser: (_: any, { _id }: UserInterFace, { dataSources }: any): void => {
     dataSources.users.delete(_id);
   },

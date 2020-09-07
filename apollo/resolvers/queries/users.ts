@@ -2,12 +2,5 @@ export const usersQuery = {
   users: (_: any, {}: any, { dataSources }: any) => dataSources.users.users(),
   getUser: (_: any, { id }: any, { dataSources }: any) =>
     dataSources.users.getUser(id),
-  isAuth: (_: any, { req }: any, context: any) => {
-    // validate auth status
-    // with call to service
-    // located on apollo context
-    console.log(req);
-
-    return context.isAuth();
-  },
+  currentUser: (parent: any, args: any, context: any) => context.getUser(),
 };
