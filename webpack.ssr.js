@@ -1,8 +1,9 @@
 const path = require('path');
+const webpackNodeExternals = require('webpack-node-externals');
 
 module.exports = {
   mode: 'development',
-  entry: './src/client/index.tsx',
+  entry: './src/index.ts',
   module: {
     rules: [
       {
@@ -22,8 +23,9 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js', '.mjs'],
   },
   output: {
-    filename: 'bundle.js',
+    filename: 'ssr.js',
     path: path.resolve(__dirname, 'dist/'),
   },
-  target: 'web',
+  target: 'node',
+  externals: [webpackNodeExternals()],
 };

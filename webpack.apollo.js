@@ -22,8 +22,8 @@ module.exports = {
     extensions: ['.ts', '.mjs', '.js', '.gql', '.graphql'],
   },
   output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'dist/apollo'),
+    filename: 'apollo.js',
+    path: path.resolve(__dirname, 'dist/'),
   },
   target: 'node',
 };
