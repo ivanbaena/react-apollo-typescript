@@ -15,6 +15,11 @@ module.exports = {
         include: /node_modules/,
         type: 'javascript/auto',
       },
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+      },
     ],
   },
   resolve: {

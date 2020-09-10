@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { ApolloServer } from 'apollo-server-express';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
+import cors from 'cors';
 import passport from 'passport';
 import passportConfig from './services/passportConfig';
 
@@ -52,6 +53,10 @@ app.use(
     },
   })
 );
+
+// Set headers to notify server that will allow our graphql api
+// to handle incoming request from different origins
+app.use(cors());
 
 // Passport is wired into express as a middleware. When a request comes in,
 // Passport will examine the request's session (as set by the above config) and

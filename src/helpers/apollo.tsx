@@ -19,4 +19,4 @@ export const client = (req: Request) =>
     cache: new InMemoryCache(),
   });
 
-export const context = {};
+export const context: any = {};
