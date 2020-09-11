@@ -11,7 +11,7 @@ export const client = (req: Request) =>
     link: createHttpLink({
       uri: 'http://localhost:4000/graphql',
       fetch,
-      credentials: 'omit',
+      credentials: 'include',
       headers: {
         cookie: req.header('Cookie'),
       },

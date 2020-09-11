@@ -12,7 +12,7 @@ const client = new ApolloClient({
   cache,
   connectToDevTools: true,
   uri: 'http://localhost:4000/graphql',
-  credentials: 'same-origin',
+  credentials: 'include',
   queryDeduplication: false,
   defaultOptions: {
     watchQuery: {

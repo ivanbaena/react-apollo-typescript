@@ -56,7 +56,7 @@ app.use(
 
 // Set headers to notify server that will allow our graphql api
 // to handle incoming request from different origins
-app.use(cors());
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 // Passport is wired into express as a middleware. When a request comes in,
 // Passport will examine the request's session (as set by the above config) and
