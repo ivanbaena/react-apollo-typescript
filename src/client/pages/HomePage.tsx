@@ -1,11 +1,7 @@
 import React from 'react';
 
 const HomePage = (props: any) => {
-  return (
-    <div>
-      HomePage SSR<button></button>
-    </div>
-  );
+  return <div>HomePage SSR</div>;
 };
 
 const loadData = () => {

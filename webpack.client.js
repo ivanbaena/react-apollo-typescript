@@ -6,7 +6,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
@@ -21,6 +21,9 @@ module.exports = {
         use: ['source-map-loader'],
       },
     ],
+  },
+  stats: {
+    warningsFilter: [/Failed to parse source map/],
   },
   resolve: {
     modules: ['node_modules'],

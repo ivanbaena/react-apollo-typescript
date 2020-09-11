@@ -1,8 +1,7 @@
-import React from 'react';
-import { renderRoutes } from 'react-router-config';
 import App from './App';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
+import LoginPage from './pages/LoginPage';
 
 export const Routes = [
   {
@@ -12,6 +11,10 @@ export const Routes = [
         ...HomePage,
         path: '/',
         exact: true,
+      },
+      {
+        ...LoginPage,
+        path: '/login',
       },
       {
         ...NotFoundPage,
