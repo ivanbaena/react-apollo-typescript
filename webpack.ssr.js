@@ -1,26 +1,14 @@
 const path = require('path');
 const webpackNodeExternals = require('webpack-node-externals');
+const { merge } = require('webpack-merge');
+const baseConfig = require('./webpack.base.js');
 
-module.exports = {
+const config = {
   mode: 'development',
   entry: './src/index.ts',
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: 'javascript/auto',
-      },
-    ],
-  },
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.tsx', '.ts', '.js', '.mjs'],
+    extensions: ['.tsx', '.ts', '.js', '.mjs', '.css', '.scss'],
   },
   output: {
     filename: 'ssr.js',
@@ -29,3 +17,5 @@ module.exports = {
   target: 'node',
   externals: [webpackNodeExternals()],
 };
+
+module.exports = merge(baseConfig, config);

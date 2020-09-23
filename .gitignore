@@ -3,3 +3,4 @@ dist
 .env
 db.ts
 .DS_Store
+.vscode

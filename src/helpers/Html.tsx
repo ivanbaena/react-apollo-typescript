@@ -3,6 +3,9 @@ import React from 'react';
 export const Html = ({ content, state }: any) => {
   return (
     <html>
+      <head>
+        <link rel='stylesheet' href='main.css' />
+      </head>
       <body>
         <div id='root' dangerouslySetInnerHTML={{ __html: content }} />
         <script

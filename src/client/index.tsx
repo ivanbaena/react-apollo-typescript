@@ -6,6 +6,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { Routes } from './Routes';
 
+import './styles/index.css';
+
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({

@@ -1,33 +1,16 @@
 const path = require('path');
+const { merge } = require('webpack-merge');
+const baseConfig = require('./webpack.base.js');
 
-module.exports = {
+const config = {
   mode: 'development',
   entry: './src/client/index.tsx',
-  module: {
-    rules: [
-      {
-        test: /\.(ts|tsx)?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: 'javascript/auto',
-      },
-      {
-        test: /\.js$/,
-        enforce: 'pre',
-        use: ['source-map-loader'],
-      },
-    ],
-  },
   stats: {
     warningsFilter: [/Failed to parse source map/],
   },
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.tsx', '.ts', '.js', '.mjs'],
+    extensions: ['.tsx', '.ts', '.js', '.mjs', '.css', '.scss'],
   },
   output: {
     filename: 'bundle.js',
@@ -35,3 +18,5 @@ module.exports = {
   },
   target: 'web',
 };
+
+module.exports = merge(baseConfig, config);
