@@ -1,7 +1,18 @@
 import React from 'react';
+import { useQuery } from '@apollo/client';
+import { CURRENT_USER } from '../queries';
 
 const HomePage = (props: any) => {
-  return <div>HomePage SSR</div>;
+  const { loading, error, data } = useQuery(CURRENT_USER);
+
+  if (error) return <div>Error! {error.message}</div>;
+
+  return (
+    <div>
+      HomePage SSR Client
+      {data && data.currentUser && ` Welcome Back ${data.currentUser.username}`}
+    </div>
+  );
 };
 
 const loadData = () => {

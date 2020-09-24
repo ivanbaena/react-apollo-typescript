@@ -1,7 +1,14 @@
+@import '../../styles/variables.css';
+
 .header {
   display: flex;
+  list-style-type: none;
+}
+
+.header li {
+  padding-right: 1rem;
 }
 
 .red {
-  color: blue;
+  color: var(--main-red-color);
 }

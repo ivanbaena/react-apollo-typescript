@@ -7,8 +7,10 @@ export const Header = () => {
   return (
     <header className='header'>
       <ul id='nav' className={styles.header}>
-        <li>
-          <Link to='/'>Home</Link>
+        <li className={styles.red}>
+          <Link to='/' className={styles.red}>
+            Home
+          </Link>
         </li>
         <li>
           <Link to='/login'>Login</Link>

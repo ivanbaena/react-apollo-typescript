@@ -41,15 +41,7 @@ module.exports = {
       {
         test: /\.css$/i,
         exclude: /\.module\.css$/i,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '/public/css/',
-            },
-          },
-          'css-loader',
-        ],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
