@@ -1,16 +1,14 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
-import { CURRENT_USER } from '../queries';
+import React, { useContext } from 'react';
+import { AuthContext } from '../hooks/AuthProvider';
 
 const HomePage = (props: any) => {
-  const { loading, error, data } = useQuery(CURRENT_USER);
-
-  if (error) return <div>Error! {error.message}</div>;
-
+  const authContext: any = useContext(AuthContext);
   return (
     <div>
       HomePage SSR Client
-      {data && data.currentUser && ` Welcome Back ${data.currentUser.username}`}
+      {authContext &&
+        authContext.currentUser &&
+        ` Welcome Back ${authContext.currentUser.username}`}
     </div>
   );
 };

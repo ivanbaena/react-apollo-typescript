@@ -1,35 +1,30 @@
-import React, { FormEvent, useState, useEffect } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import { LOGIN, LOGOUT } from '../../mutations';
-import { CURRENT_USER } from '../../queries';
+import React, { FormEvent, useState } from 'react';
 
-export const AuthForm = () => {
+interface AuthFormProps {
+  onSubmit: Function;
+  logout: Function;
+  userData: any;
+  isSignup: Boolean;
+}
+export const AuthForm = ({
+  onSubmit,
+  logout,
+  userData,
+  isSignup,
+}: AuthFormProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const { loading, error, data } = useQuery(CURRENT_USER);
-  const [
-    login,
-    { loading: mutationLoading, error: mutationError, data: mutationData },
-  ] = useMutation(LOGIN, {
-    refetchQueries: [{ query: CURRENT_USER }],
-  });
-  const [logout, {}] = useMutation(LOGOUT, {
-    refetchQueries: [{ query: CURRENT_USER }],
-  });
+  const [username, setUsername] = useState('');
 
   const onFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    login({ variables: { email, password } });
+    isSignup
+      ? onSubmit({ variables: { email, username, password } })
+      : onSubmit({ variables: { email, password } });
   };
 
-  useEffect(() => {
-    console.log('data', data);
-    console.log('mutationData', mutationData);
-  }, [mutationLoading]);
-
   return (
-    <div className='loginForm'>
+    <div className='authform'>
       <form onSubmit={onFormSubmit}>
         <input
           name='email'
@@ -37,6 +32,14 @@ export const AuthForm = () => {
           placeholder='email'
           onChange={(e) => setEmail(e.target.value)}
         />
+        {isSignup && (
+          <input
+            name='username'
+            type='text'
+            placeholder='username'
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        )}
         <input
           name='password'
           type='text'
@@ -45,10 +48,10 @@ export const AuthForm = () => {
         />
         <button type='submit'>Submit</button>
       </form>
-      {data && data.currentUser ? (
+      {userData && userData.currentUser ? (
         <button onClick={() => logout()}>Logout</button>
       ) : (
-        <button onClick={() => console.log(data)}>Not Logged</button>
+        <button onClick={() => console.log(userData)}>Not Logged</button>
       )}
     </div>
   );

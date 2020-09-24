@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { AuthForm } from '../components/AuthForm/AuthForm';
+import { LoginForm, SignupForm } from '../components/AuthForm/';
 import { CURRENT_USER } from '../queries';
 
 const LoginPage = ({ staticContext }: any) => {
@@ -12,8 +12,15 @@ const LoginPage = ({ staticContext }: any) => {
 
   return (
     <div>
-      <h1>Please Login or SignUp</h1>
-      <AuthForm />
+      <div>
+        <h1>Please Login</h1>
+        <LoginForm />
+      </div>
+      <h2>Or</h2>
+      <div>
+        <h1>Please Signup</h1>
+        <SignupForm />
+      </div>
     </div>
   );
 };

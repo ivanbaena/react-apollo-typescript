@@ -18,6 +18,9 @@ export const Header = () => {
         <li>
           <Link to='/404'>404 Page</Link>
         </li>
+        <li>
+          <Link to='/dashboard'>Dashboard</Link>
+        </li>
       </ul>
     </header>
   );
