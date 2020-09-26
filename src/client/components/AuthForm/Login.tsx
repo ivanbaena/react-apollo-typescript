@@ -1,16 +1,26 @@
-import React from 'react';
-import { useMutation, useQuery } from '@apollo/client';
+import React, { useContext } from 'react';
+import { useMutation } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
 import { LOGIN, LOGOUT } from '../../mutations';
 import { CURRENT_USER } from '../../queries';
 import { AuthForm } from './AuthForm';
+import { AuthContext } from '../../hooks/';
 
 export const LoginForm = () => {
-  const { loading, error, data } = useQuery(CURRENT_USER);
+  const authContext: any = useContext(AuthContext);
+  const history = useHistory();
+
   const [
     login,
     { loading: mutationLoading, error: mutationError, data: mutationData },
   ] = useMutation(LOGIN, {
     refetchQueries: [{ query: CURRENT_USER }],
+    onCompleted: (data) => {
+      if (data && data.currentUser !== null) {
+        history.push('/dashboard');
+      }
+    },
+    awaitRefetchQueries: true,
   });
   const [logout, {}] = useMutation(LOGOUT, {
     refetchQueries: [{ query: CURRENT_USER }],
@@ -21,8 +31,9 @@ export const LoginForm = () => {
       <AuthForm
         onSubmit={login}
         logout={logout}
-        userData={data}
+        userData={authContext}
         isSignup={false}
+        className='login-form'
       />
     </div>
   );

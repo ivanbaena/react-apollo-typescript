@@ -5,12 +5,14 @@ interface AuthFormProps {
   logout: Function;
   userData: any;
   isSignup: Boolean;
+  className: string;
 }
 export const AuthForm = ({
   onSubmit,
   logout,
   userData,
   isSignup,
+  className,
 }: AuthFormProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +26,7 @@ export const AuthForm = ({
   };
 
   return (
-    <div className='authform'>
+    <div className={className}>
       <form onSubmit={onFormSubmit}>
         <input
           name='email'

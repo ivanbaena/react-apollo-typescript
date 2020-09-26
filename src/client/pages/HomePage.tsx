@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../hooks/AuthProvider';
+import { AuthContext } from '../hooks/';
 
 const HomePage = (props: any) => {
   const authContext: any = useContext(AuthContext);
