@@ -7,12 +7,12 @@ export class Posts extends MongoDataSource<PostInterface> {
     return this.model.find();
   }
 
-  userPosts(id: Number) {
+  userPosts(id: String) {
     return this.model.find({ userId: id }).exec();
   }
 
-  save(post: String, userId: Number) {
-    new this.model({ post: post, userId: userId }).save();
+  save(post: String, userId: String, date: Date) {
+    return new this.model({ post: post, userId: userId, date: date }).save();
   }
 
   delete(id: Types.ObjectId) {

@@ -2,9 +2,9 @@ import React from 'react';
 
 export const Html = ({ content, state }: any) => {
   return (
-    <html>
+    <html lang='en-us'>
       <head>
-        <link rel='stylesheet' href='main.css' />
+        <link rel='stylesheet' href='/main.css' />
       </head>
       <body>
         <div id='root' dangerouslySetInnerHTML={{ __html: content }} />
@@ -16,7 +16,7 @@ export const Html = ({ content, state }: any) => {
             )};`,
           }}
         />
-        <script src='bundle.js'></script>
+        <script src='/bundle.js'></script>
       </body>
     </html>
   );

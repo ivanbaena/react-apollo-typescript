@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../hooks/';
 
 import * as styles from './Header.module.css';
 
 export const Header = () => {
+  const authContext: any = useContext(AuthContext);
+
   return (
     <header className='header'>
       <ul id='nav' className={styles.header}>
@@ -18,9 +21,13 @@ export const Header = () => {
         <li>
           <Link to='/404'>404 Page</Link>
         </li>
-        <li>
-          <Link to='/dashboard'>Dashboard</Link>
-        </li>
+        {authContext && authContext.currentUser && (
+          <li>
+            <Link to={`/dashboard/${authContext.currentUser._id}`}>
+              Dashboard
+            </Link>
+          </li>
+        )}
       </ul>
     </header>
   );

@@ -4,13 +4,13 @@ export interface PostInterface extends Document {
   _id: String;
   post: String;
   date: Date;
-  userId: Number;
+  userId: String;
 }
 
 export const PostSchema = new Schema({
   post: { type: String, required: true },
-  date: Date,
-  userId: Number,
+  date: { type: Date },
+  userId: { type: String, required: true },
   name: String,
 });
 

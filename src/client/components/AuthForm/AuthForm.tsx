@@ -53,7 +53,7 @@ export const AuthForm = ({
       {userData && userData.currentUser ? (
         <button onClick={() => logout()}>Logout</button>
       ) : (
-        <button onClick={() => console.log(userData)}>Not Logged</button>
+        <button onClick={() => {}}>Not Logged</button>
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { AuthForm } from './AuthForm';
 import { SIGN_UP, LOGOUT } from '../../mutations';
 import { CURRENT_USER } from '../../queries';

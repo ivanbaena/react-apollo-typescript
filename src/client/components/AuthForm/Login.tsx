@@ -16,8 +16,8 @@ export const LoginForm = () => {
   ] = useMutation(LOGIN, {
     refetchQueries: [{ query: CURRENT_USER }],
     onCompleted: (data) => {
-      if (data && data.currentUser !== null) {
-        history.push('/dashboard');
+      if (data) {
+        history.push(`/dashboard/${data.login._id}`);
       }
     },
     awaitRefetchQueries: true,

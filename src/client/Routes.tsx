@@ -19,7 +19,7 @@ export const Routes = [
       },
       {
         ...Dashboard,
-        path: '/dashboard',
+        path: '/dashboard/:id',
       },
       {
         ...NotFoundPage,

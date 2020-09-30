@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { CURRENT_USER } from '../queries';
 import { AuthContext, isAuth } from '../hooks/';
+import { PostForm } from '../components/PostForm';
+import { PostList } from '../components/PostList';
 
 const Dashboard = () => {
   const authContext: any = useContext(AuthContext);
@@ -16,11 +18,17 @@ const Dashboard = () => {
     }
   }, [authContext]);
 
-  if (authContext === null) {
+  if (authContext === null || authContext.currentUser === null) {
     return <div />;
   }
 
-  return <div>Protected Route</div>;
+  return (
+    <div>
+      Protected Route
+      <PostForm userId={authContext.currentUser._id} />
+      <PostList userId={authContext.currentUser._id} />
+    </div>
+  );
 };
 
 const loadData = () => {};

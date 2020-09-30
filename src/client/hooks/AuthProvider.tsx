@@ -12,8 +12,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const { loading, error, data } = useQuery(CURRENT_USER, { ssr: false });
   const [auth, setAuth] = useState(null);
   useEffect(() => {
-    console.log('ok', data);
-
     if (data !== undefined) {
       setAuth(data);
     }

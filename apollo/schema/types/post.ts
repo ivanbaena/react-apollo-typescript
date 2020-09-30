@@ -7,16 +7,16 @@ export const post = gql`
     _id: ID
     post: String
     date: Date
-    userId: Int
+    userId: String
   }
 
   extend type Query {
     posts: [Post]
-    userPosts(id: Int!): [Post]
+    userPosts(userId: String!): [Post]
   }
 
   extend type Mutation {
-    addPost(post: String!, userId: Int!): Post
+    addPost(post: String!, userId: String!): Post
     deletePost(_id: ID): Post
     updatePost(_id: ID, post: String): Post
   }
