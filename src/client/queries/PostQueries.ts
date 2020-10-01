@@ -4,6 +4,9 @@ export const USER_POSTS = gql`
   query UserPosts($userId: String!) {
     userPosts(userId: $userId) {
       post
+      userId
+      _id
+      date
     }
   }
 `;

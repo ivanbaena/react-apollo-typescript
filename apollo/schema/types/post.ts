@@ -17,7 +17,7 @@ export const post = gql`
 
   extend type Mutation {
     addPost(post: String!, userId: String!): Post
-    deletePost(_id: ID): Post
+    deletePost(_id: String): Post
     updatePost(_id: ID, post: String): Post
   }
 `;

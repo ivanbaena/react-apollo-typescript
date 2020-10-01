@@ -5,7 +5,7 @@ export const postMutations = {
     return dataSources.posts.save(post, userId, new Date());
   },
   deletePost: (_: void, { _id }: PostInterface, { dataSources }: any): void => {
-    dataSources.posts.delete(_id);
+    return dataSources.posts.delete(_id);
   },
   updatePost: (
     _: void,

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { USER_POSTS } from '../../queries';
-import { Post, PostProps } from './Post';
+import { Post } from './Post';
 
 interface PostListProps {
   userId: string;
@@ -12,14 +12,14 @@ export const PostList = ({ userId }: PostListProps) => {
     variables: { userId },
   });
 
-  useEffect(() => {
-    console.log('posts', data);
-  }, [loading]);
+  useEffect(() => {}, [loading]);
 
   const renderPosts = (data: any) => {
     if (data) {
+      console.log('IVAN', data);
+
       return data.userPosts.map((post: any, i: number) => {
-        return <Post post={post.post} key={i} />;
+        return <Post postData={post} key={i} userId={userId} />;
       });
     }
     return;

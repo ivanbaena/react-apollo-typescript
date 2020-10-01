@@ -8,7 +8,19 @@ import { Routes } from './Routes';
 
 import './styles/index.css';
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        userPosts: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
+  },
+});
 
 const client = new ApolloClient({
   cache,

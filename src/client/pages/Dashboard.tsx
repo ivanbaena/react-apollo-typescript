@@ -11,8 +11,6 @@ const Dashboard = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(authContext);
-
     if (authContext !== null && !isAuth(authContext)) {
       history.push('/');
     }

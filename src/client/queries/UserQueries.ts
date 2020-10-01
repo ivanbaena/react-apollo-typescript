@@ -8,3 +8,11 @@ export const CURRENT_USER = gql`
     }
   }
 `;
+
+export const FIND_USER = gql`
+  query GetUser($userId: String!) {
+    getUser(userId: $userId) {
+      username
+    }
+  }
+`;

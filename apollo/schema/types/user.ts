@@ -12,7 +12,7 @@ export const user = gql`
 
   extend type Query {
     users: [User]
-    getUser(id: ID): User
+    getUser(userId: String): User
     currentUser: User
   }
 

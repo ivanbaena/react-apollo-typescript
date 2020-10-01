@@ -8,7 +8,7 @@ export class Users extends MongoDataSource<UserInterFace> {
   users() {
     return this.model.find();
   }
-  getUser(userId: Types.ObjectId) {
+  getUser(userId: Types.ObjectId | string) {
     return this.findOneById(userId);
   }
 

@@ -8,3 +8,11 @@ export const ADD_POST = gql`
     }
   }
 `;
+
+export const DELETE_POST = gql`
+  mutation DeletePost($_id: String!) {
+    deletePost(_id: $_id) {
+      _id
+    }
+  }
+`;

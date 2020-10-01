@@ -15,8 +15,8 @@ export class Posts extends MongoDataSource<PostInterface> {
     return new this.model({ post: post, userId: userId, date: date }).save();
   }
 
-  delete(id: Types.ObjectId) {
-    this.model.findByIdAndDelete(id).exec();
+  delete(id: Types.ObjectId | string) {
+    return this.model.findByIdAndDelete(id).exec();
   }
 
   update(id: Types.ObjectId, post: String) {
