@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { CURRENT_USER } from '../queries';
 import { AuthContext, isAuth } from '../hooks/';
 import { PostForm } from '../components/PostForm';
 import { PostList } from '../components/PostList';
+import { USER_POSTS } from '../queries';
 
 const Dashboard = () => {
   const authContext: any = useContext(AuthContext);
@@ -23,8 +22,15 @@ const Dashboard = () => {
   return (
     <div>
       Protected Route
-      <PostForm userId={authContext.currentUser._id} />
-      <PostList userId={authContext.currentUser._id} />
+      <PostForm
+        userId={authContext.currentUser._id}
+        username={authContext.currentUser.username}
+      />
+      <PostList
+        userId={authContext.currentUser._id}
+        fetchQuery={USER_POSTS}
+        fetchType={'userPosts'}
+      />
     </div>
   );
 };

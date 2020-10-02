@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { USER_POSTS } from '../../queries';
 import { Post } from './Post';
 
 interface PostListProps {
   userId: string;
+  fetchQuery: any;
+  fetchType: string;
 }
-export const PostList = ({ userId }: PostListProps) => {
-  const { loading, error, data } = useQuery(USER_POSTS, {
+export const PostList = ({ userId, fetchQuery, fetchType }: PostListProps) => {
+  const { loading, error, data } = useQuery(fetchQuery, {
     ssr: false,
     variables: { userId },
   });
@@ -16,11 +17,15 @@ export const PostList = ({ userId }: PostListProps) => {
 
   const renderPosts = (data: any) => {
     if (data) {
-      console.log('IVAN', data);
-
-      return data.userPosts.map((post: any, i: number) => {
-        return <Post postData={post} key={i} userId={userId} />;
-      });
+      return data[fetchType]
+        .slice()
+        .sort(
+          (a: any, b: any) =>
+            new Date(b.date).getTime() - new Date(a.date).getTime()
+        )
+        .map((post: any, i: number) => {
+          return <Post postData={post} key={i} userId={userId} />;
+        });
     }
     return;
   };

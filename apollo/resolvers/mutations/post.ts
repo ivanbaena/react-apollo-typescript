@@ -1,8 +1,12 @@
 import { PostInterface } from '../../models';
 
 export const postMutations = {
-  addPost: (_: void, { post, userId }: PostInterface, { dataSources }: any) => {
-    return dataSources.posts.save(post, userId, new Date());
+  addPost: (
+    _: void,
+    { post, userId, username }: PostInterface,
+    { dataSources }: any
+  ) => {
+    return dataSources.posts.save(post, userId, username, new Date());
   },
   deletePost: (_: void, { _id }: PostInterface, { dataSources }: any): void => {
     return dataSources.posts.delete(_id);

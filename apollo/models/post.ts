@@ -5,12 +5,14 @@ export interface PostInterface extends Document {
   post: String;
   date: Date;
   userId: String;
+  username: String;
 }
 
 export const PostSchema = new Schema({
   post: { type: String, required: true },
   date: { type: Date },
   userId: { type: String, required: true },
+  username: { type: String, required: true },
   name: String,
 });
 

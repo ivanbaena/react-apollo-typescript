@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_POST } from '../../mutations';
 import { USER_POSTS } from '../../queries';
 
-export const PostForm = ({ userId }: any) => {
+export const PostForm = ({ userId, username }: any) => {
   const [post, setPost] = useState('');
   const [
     addPost,
@@ -14,7 +14,7 @@ export const PostForm = ({ userId }: any) => {
 
   const onFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    addPost({ variables: { post, userId } });
+    addPost({ variables: { post, userId, username } });
     setPost('');
   };
 
