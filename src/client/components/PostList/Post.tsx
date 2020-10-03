@@ -2,7 +2,6 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { USER_POSTS } from '../../queries';
 import { DELETE_POST } from '../../mutations';
-import { post } from '../../../../apollo/schema/types/post';
 
 export interface PostProps {
   postData: {
@@ -11,6 +10,9 @@ export interface PostProps {
     userId: string;
     username: string;
     date: Date;
+    attributes: {
+      likes: Number;
+    };
   };
   userId: string;
 }
@@ -35,6 +37,7 @@ export const Post = ({ postData, userId }: PostProps) => {
       <p>{postData.post}</p>
       <p>postedBy: {postData.username}</p>
       <p>posted: {convert(postData.date)}</p>
+      <p>count: {postData.attributes.likes || 0}</p>
       {postData.userId === userId && (
         <button
           onClick={() => deletePost({ variables: { _id: postData._id } })}
